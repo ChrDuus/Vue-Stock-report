@@ -1,17 +1,38 @@
 <template>
     <div class="BaseCard">
-
+        <ul>
+  <li v-for="(num, i) in revenue" :key="i">{{ num }}</li>
+</ul>
         <slot></slot>
     </div>
 
 </template>
 
 <script>
+import { stockService } from '@/services/stockService';
 export default{
     name: 'BaseCard',
     components:{
 
+    },
+    data() {
+    return {
+      revenue: [],      
+      loading: true,    
+      error: null,      
+    };
+},
+async created() {
+    try {
+      const result = await stockService.getRevenue('$AAPL'); 
+      this.revenue = result.data; 
+    } catch (err) {
+      console.error(err);
+      this.error = "Fehler beim Laden der Daten";
+    } finally {
+      this.loading = false;
     }
+  },
 }
 
 </script>

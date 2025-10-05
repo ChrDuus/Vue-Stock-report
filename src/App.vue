@@ -15,7 +15,7 @@ export default {
   components: {BaseCard
   },
   async created(){
-    this.data = await stockService.fetchData('$AAPL')
+    this.data = await stockService.getRevenue('$AAPL')
     console.log(this.data);
     
   }
