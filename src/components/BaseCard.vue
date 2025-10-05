@@ -25,10 +25,11 @@ export default{
 async created() {
     try {
       const result = await stockService.getRevenue('$AAPL'); 
-      this.revenue = result.data; 
+      this.revenue = result; 
+      console.log("SERVICE RESULT:", result);
     } catch (err) {
       console.error(err);
-      this.error = "Fehler beim Laden der Daten";
+      this.error = "Error loading Data";
     } finally {
       this.loading = false;
     }
